@@ -14,11 +14,8 @@ def services():
     return "Welcome to our services page!"  
   
   
-@app.route('/homepage')
-def homepage():
-    name="Mrs Akinfolaju"
-    email="peju@yahoo.com"
-    return render_template('homepage.html', name=name,email=email) 
+
+ 
 
 @app.route("/maths")
 def maths ():
@@ -40,9 +37,17 @@ def division ():
     a = 100
     b = 15
     c= a/b
-    return "Hurray!, you are correct, this is the result" + str(c)  
+    return "Hurray!, you are correct, this is the result" + str(c) 
  
- 
+@app.route('/homepage')
+def homepage():
+    name="Mrs Akinfolaju"
+    email="peju@yahoo.com"
+    return render_template('homepage.html', name=name,email=email)
+
+
+    
+
  
  
  
