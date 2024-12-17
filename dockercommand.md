@@ -8,7 +8,7 @@ ls -lart
  $ docker images -a
 # Comand to build your image
  $ docker build -t feyiimage .
-
+# command to remove images
   docker rmi image seunimage
 # ======================================================================================================
 # Apply force to delete 1st, 2nd, 3rd, 4th
@@ -51,3 +51,15 @@ bb0b75a1d316   feyiimage   "python ./main.py"   36 seconds ago   Up 35 seconds (
 # To create and  push an image to docker hub
  $ docker run --name rainbow-container -dp 5004:5004 feyidocker/rainbowimage:1.0
  $ docker push feyidocker/rainbowimage:1.0
+
+# this is my dockerfile
+FROM python:alpine
+ADD . /app
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 5004
+HEALTHCHECK --interval=30s --timeout=30s --start-period=30s --retries=5 \
+     CMD curl -f http://localhost:5004/health || exit 1
+ENTRYPOINT [ "python","./main.py" ]
